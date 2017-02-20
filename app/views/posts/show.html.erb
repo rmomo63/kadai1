@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
+  <!--strong>タイトル</strong-->
   <%= @post.title %>
-</p>
-
+</h1>
+<!--h2>
+  <strong>本文</strong>
+</h2-->
 <p>
-  <strong>Content:</strong>
   <%= @post.content %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'この記事を編集する', edit_post_path(@post) %>
+<%= link_to 'この記事を削除する', @post, method: :delete, data: { confirm: '本当に削除しますか?' } %>
+
+<h2>この記事に対するコメント</h2>
+<% @post.comment.each do |comment| %>
+  <h3><%= comment.title %></h3>
+  <p><%= comment.content %></p>
+<% end %>
+
+
+<%= link_to '記事一覧へ', posts_path %>
