@@ -15,12 +15,17 @@
 <%= link_to 'この記事を削除する', @post, method: :delete, data: { confirm: '本当に削除しますか?' } %>
 
 <h2>この記事に対するコメント</h2>
-<% @post.comments.each do |comment| %>
-  <h3><%= comment.title %></h3>
-  <p><%= comment.content %></p>
+<% if @post.comments.any? %>
+  <% @post.comments.each do |comment| %>
+    <h3><%= comment.commenter %></h3>
+    <p><%= comment.ccontent %></p>
+    <%= link_to 'このコメントを編集する', edit_post_comment_path(@post, comment) %>
+    <%= link_to 'このコメントを削除する', post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+  <% end %>
+<% else %>
+  <p>まだコメントはありません</p>
 <% end %>
-
-<h3>コメントを追加する</h3>
-<%= render 'form', {post: @post, comment: @comment} %>
+<h3>コメントを投稿する</h3>
+<%= render 'comments/form', {post: @post, comment: @comment} %>
 
 <%= link_to '記事一覧へ', posts_path %>

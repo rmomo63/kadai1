@@ -1,24 +1,12 @@
 <%= form_for([post, comment]) do |f| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
-    <%= f.label :title %>
-    <%= f.text_area :title %>
+    <%= f.label :commenter %>
+    <%= f.text_area :commenter %>
   </div>
 
   <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content %>
+    <%= f.label :ccontent %>
+    <%= f.text_area :ccontent %>
   </div>
 
   <div class="actions">
