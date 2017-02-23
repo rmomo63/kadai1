@@ -15,10 +15,12 @@
 <%= link_to 'この記事を削除する', @post, method: :delete, data: { confirm: '本当に削除しますか?' } %>
 
 <h2>この記事に対するコメント</h2>
-<% @post.comment.each do |comment| %>
+<% @post.comments.each do |comment| %>
   <h3><%= comment.title %></h3>
   <p><%= comment.content %></p>
 <% end %>
 
+<h3>コメントを追加する</h3>
+<%= render 'form', {post: @post, comment: @comment} %>
 
 <%= link_to '記事一覧へ', posts_path %>
