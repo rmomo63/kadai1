@@ -25,9 +25,11 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
     
-    redirect_to post_path(@post)
+    
+    if @post.comments.create(comment_params)
+      redirect_to post_path(@post)
+    end
   end
 
   # PATCH/PUT /comments/1
@@ -58,11 +60,11 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @post = Post.find(params[:post_id])
-      @comment = Comment.find(params[:id])
+      @comment = @post.comments.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params[:comment].permit(:commenter, :ccontent)
+      params[:comment].permit(:commenter, :comment_content)
     end
 end

@@ -17,10 +17,12 @@
 <h2>この記事に対するコメント</h2>
 <% if @post.comments.any? %>
   <% @post.comments.each do |comment| %>
-    <h3><%= comment.commenter %></h3>
-    <p><%= comment.ccontent %></p>
-    <%= link_to 'このコメントを編集する', edit_post_comment_path(@post, comment) %>
-    <%= link_to 'このコメントを削除する', post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+    <% if comment.id != nil %>
+      <h3><%= comment.commenter %></h3>
+      <p><%= comment.comment_content %></p>
+      <%= link_to 'このコメントを編集する', edit_post_comment_path(@post, comment) %>
+      <%= link_to 'このコメントを削除する', post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+    <% end %>
   <% end %>
 <% else %>
   <p>まだコメントはありません</p>
